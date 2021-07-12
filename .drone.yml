@@ -6,3 +6,4 @@ steps:
     image: maven
     commands:
       - mvn clean
+      - mvn test
