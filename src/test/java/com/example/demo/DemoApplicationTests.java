@@ -22,8 +22,10 @@ class DemoApplicationTests {
     @Test
     public void testWelcome() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/hello")).andExpect(MockMvcResultMatchers.status().isOk());
-
     }
 
-
+    @Test
+    public void testFailure() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/")).andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }
