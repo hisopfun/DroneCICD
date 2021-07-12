@@ -7,3 +7,4 @@ steps:
     commands:
       - mvn clean
       - mvn test
+      - mvn install
