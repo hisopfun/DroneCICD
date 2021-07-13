@@ -15,7 +15,22 @@ steps:
   commands:
   - mvn clean package  -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
 
-
+  #3.upload jar file
+- name: scp
+  image: appleboy/drone-scp
+  settings:
+    host:
+      from_secret: host_ip
+    username: 
+      from_secret: host_user
+    password:
+      from_secret: host_password
+    port: 22
+    command_timeout: 2m
+    target: 
+      - ~/
+    source:
+      - ./target/demo-0.0.1-SNAPSHOT.jar
 
 
 
