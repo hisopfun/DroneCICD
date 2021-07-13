@@ -9,4 +9,3 @@ steps:
       - mvn clean
       - mvn test
       - mvn install
-     
