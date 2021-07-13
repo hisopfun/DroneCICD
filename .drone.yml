@@ -2,7 +2,6 @@ kind: pipeline
 name: default
 platform:
   os: linux
-  arch: arm
 steps:
   - name: test
     image: maven
