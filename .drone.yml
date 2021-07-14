@@ -49,7 +49,7 @@ steps:
       - echo ====开始部署=======
       - cd ~/target
       - kill $(cat ./pid.file)
-      - java -jar demo-0.0.1-SNAPSHOT.jar & echo $! > ./pid.file &
+      - java -jar demo-0.0.1-SNAPSHOT.jar& echo $! > ./pid.file &
       - echo ====部署成功======
 trigger:
   branch:
