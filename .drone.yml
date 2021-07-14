@@ -1,0 +1,34 @@
+kind: pipeline
+name: dev_depoly
+
+steps:
+
+  #1.maven 測試
+- name: maven-test
+  image: maven:3.6.1-jdk-8
+  commands:
+  - mvn test
+
+  #2.maven 打包
+- name: maven-build
+  image: maven:3.6.1-jdk-8
+  commands:
+  - cd ./MyProject
+  - mvn clean package  -DskipTests=true -Dmaven.javadoc.skip=true -B -V 
+
+  #3.upload jar file
+- name: scp
+  image: appleboy/drone-scp
+  settings:
+    host:
+      from_secret: host_ip
+    username: 
+      from_secret: host_user
+    password:
+      from_secret: host_password
+    port: 22
+    command_timeout: 2m
+    target: 
+      - ~/
+    source:
+      - ./target/demo-0.0.1-SNAPSHOT.jar
