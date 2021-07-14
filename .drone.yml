@@ -32,4 +32,28 @@ steps:
       - ~/
     source:
       - ./target/demo-0.0.1-SNAPSHOT.jar
+
       
+  #4.deploy
+- name: ssh commands
+  image: appleboy/drone-ssh
+  settings:
+    host:
+      from_secret: host_ip
+    username: 
+      from_secret: host_user
+    password: 
+      from_secret: host_password
+    port: 22
+    script:
+      - echo ====开始部署=======
+      - cd ~/target
+      - kill $(cat ./pid.file)
+      - java -jar demo-0.0.1-SNAPSHOT.jar & echo $! > ./pid.file &
+      - echo ====部署成功======
+trigger:
+  branch:
+  - master
+  event:
+  - tag
+  - push
